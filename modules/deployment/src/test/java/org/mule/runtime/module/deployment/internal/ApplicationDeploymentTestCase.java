@@ -118,6 +118,9 @@ public class ApplicationDeploymentTestCase extends AbstractApplicationDeployment
   @Rule
   public SystemProperty systemProperty = new SystemProperty(OVERWRITTEN_PROPERTY, OVERWRITTEN_PROPERTY_SYSTEM_VALUE);
 
+  //@Rule
+  //public SystemProperty systemProperty2 = new SystemProperty("env", "dev");
+
   public ApplicationDeploymentTestCase(boolean parallelDeployment) {
     super(parallelDeployment);
   }
@@ -268,6 +271,19 @@ public class ApplicationDeploymentTestCase extends AbstractApplicationDeployment
     redeployAndVerifyPropertyInRegistry(dummyAppDescriptorWithPropsFileBuilder.getId(), deploymentProperties,
                                         (registry) -> registry.lookupByName(FLOW_PROPERTY_NAME).get()
                                             .equals(FLOW_PROPERTY_NAME_VALUE_ON_REDEPLOY));
+  }
+
+  @Test
+  public void deployAppWithDeploymentPropertiesInImportTag() throws Exception {
+    Properties deploymentProperties = new Properties();
+    deploymentProperties.put("env", "dev");
+    startDeployment();
+    ApplicationFileBuilder applicationFileBuilder = appFileBuilder("app-properties")
+            .definedBy("app-properties-config.xml");
+    deployAndVerifyPropertyInRegistry(applicationFileBuilder.getArtifactFile().toURI(),
+            deploymentProperties,
+            (registry) -> registry.lookupByName("env").get()
+                    .equals("dev"));
   }
 
   @Test
