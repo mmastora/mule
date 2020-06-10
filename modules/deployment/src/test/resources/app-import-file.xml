@@ -3,6 +3,6 @@
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd">
 
-    <import file="config-${env}.xml"/>
+    <import file="config-${environment}.xml"/>
 
 </mule>
