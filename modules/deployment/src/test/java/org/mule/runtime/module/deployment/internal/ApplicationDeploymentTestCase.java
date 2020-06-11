@@ -294,11 +294,11 @@ public class ApplicationDeploymentTestCase extends AbstractApplicationDeployment
     deploymentProperties.put("oneProperty", "dev");
     startDeployment();
     ApplicationFileBuilder applicationFileBuilder = appFileBuilder("app-import-file-overwritten")
-            .definedBy("app-import-file-overwritten.xml").usingResource("config-dev.xml", "config-dev.xml");
+        .definedBy("app-import-file-overwritten.xml").usingResource("config-dev.xml", "config-dev.xml");
     deployAndVerifyPropertyInRegistry(applicationFileBuilder.getArtifactFile().toURI(),
-            deploymentProperties,
-            (registry) -> registry.lookupByName("oneProperty").get()
-                    .equals("dev"));
+                                      deploymentProperties,
+                                      (registry) -> registry.lookupByName("oneProperty").get()
+                                          .equals("dev"));
   }
 
   @Test
