@@ -41,7 +41,7 @@ import java.util.concurrent.ConcurrentMap;
  * Finally, this class uses a PushbackInputStream to enable parsing of individual
  * messages. The stream stores any pushed-back bytes into it's own internal buffer
  * and not the original stream. Therefore, the read buffer size is intentionally
- * limited to insure that unread characters remain on the stream so that all data may
+ * limited to ensure that unread characters remain on the stream so that all data may
  * be read later.
  * </p>
  */
@@ -139,6 +139,6 @@ public class XmlMessageProtocol extends AbstractByteProtocol
      */
     protected boolean isRepeat(int patternIndex, int len, int available)
     {
-        return patternIndex < 0 && len == READ_BUFFER_SIZE && available > 0;
+        return patternIndex < 0 && available > 0;
     }
 }
